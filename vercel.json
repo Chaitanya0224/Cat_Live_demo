@@ -2,6 +2,10 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/prod/:path*",
+      "destination": "https://gps6cdg7h9.execute-api.eu-central-1.amazonaws.com/prod/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
