@@ -1,0 +1,220 @@
+// ── Hero Section ─────────────────────────────────────────────────────────────
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0 80px;
+
+  @media (max-width: 767px) {
+    padding: 72px 0 56px;
+  }
+}
+
+.hero-ambient {
+  position: absolute;
+  top: -30%;
+  left: 5%;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255, 107, 0, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  margin-bottom: 1.25rem;
+  color: #1a1a1a;
+  line-height: 1.07;
+}
+
+.hero-subtitle-text {
+  color: #666;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #444;
+  max-width: 520px;
+  margin-bottom: 2rem;
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+// ── Hero Visual ───────────────────────────────────────────────────────────────
+.hero-visual {
+  position: relative;
+  display: inline-block;
+  width: 320px;
+  height: 320px;
+  margin: 0 auto;
+}
+
+.hero-img-ring {
+  position: absolute;
+  border-radius: 50%;
+  border-style: solid;
+  animation: spin linear infinite;
+}
+
+.ring-1 { inset: -14px; border: 1px solid rgba(255, 107, 0, 0.15); animation-duration: 20s; }
+.ring-2 { inset: -30px; border: 1px dashed rgba(255, 51, 102, 0.1); animation-duration: 32s; animation-direction: reverse; }
+.ring-3 { inset: -50px; border: 1px solid rgba(255, 184, 0, 0.15); animation-duration: 50s; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.hero-cat-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 107, 0, 0.35);
+  box-shadow: 0 0 50px rgba(255, 107, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+// ── Stats Bar ─────────────────────────────────────────────────────────────────
+.stats-bar {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+
+  @media (max-width: 767px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 420px) { grid-template-columns: 1fr; }
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: var(--radius-lg);
+}
+
+.stat-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  .material-symbols-rounded { font-size: 22px; }
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 2px;
+  color: #1a1a1a;
+}
+
+// ── Registry Section ──────────────────────────────────────────────────────────
+.registry-section {
+  background: var(--color-bg-primary);
+}
+
+.registry-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex: 1;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  height: 46px;
+  border-radius: var(--radius-pill) !important;
+  min-width: 260px;
+  max-width: 380px;
+  flex: 1;
+
+  @media (max-width: 600px) { min-width: 100%; max-width: 100%; }
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #888;
+  font-variation-settings: 'FILL' 0;
+}
+
+.search-input {
+  background: none;
+  border: none;
+  outline: none;
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #1a1a1a;
+
+  &::placeholder { color: #aaa; }
+}
+
+.search-clear {
+  padding: 4px;
+  border-radius: 6px;
+}
+
+// ── Skeleton ──────────────────────────────────────────────────────────────────
+.skeleton-card { border-radius: var(--radius-lg); overflow: hidden; }
+.skeleton-img  { height: 200px; }
+.skeleton-body { padding: 16px; }
+.skeleton-line { border-radius: 6px; margin-bottom: 8px; height: 12px; }
+
+// ── Error State ───────────────────────────────────────────────────────────────
+.error-state {
+  padding: 60px 40px;
+  border-radius: var(--radius-xl);
+  margin-top: 32px;
+}
+
+.error-icon-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.error-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 51, 102, 0.4);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+// ── Empty State ───────────────────────────────────────────────────────────────
+.empty-state {
+  padding: 80px 40px;
+  border-radius: var(--radius-xl);
+  text-align: center;
+}
+
+.empty-img {
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 16px;
+  opacity: 0.5;
+}

@@ -1,0 +1,120 @@
+<div class="form-shell">
+  <div class="form-ambient" [class.update-mode]="data.mode === 'update'"></div>
+
+  <button class="close-btn btn-glass" (click)="cancel()" type="button">
+    <span class="material-symbols-rounded">close</span>
+  </button>
+
+  <div class="form-header" [attr.data-mode]="data.mode">
+    <div class="form-icon-wrap" [class.update-icon]="data.mode === 'update'">
+      <span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">
+        {{ data.mode === 'create' ? 'add_circle' : 'edit_note' }}
+      </span>
+    </div>
+    <div>
+      <span class="t-label badge-pill" [class.badge-blue]="data.mode === 'create'" [class.badge-gold]="data.mode === 'update'">
+        {{ data.mode === 'create' ? 'New Record' : 'Edit Record' }}
+      </span>
+      <h2 class="form-title t-heading">
+        {{ data.mode === 'create' ? 'Onboard a New Feline' : 'Update Feline Intel' }}
+      </h2>
+      <p class="form-subtitle t-body">
+        {{ data.mode === 'create'
+          ? 'Fill in the details below to register a new cat in the vault.'
+          : 'Update the details for ' + data.cat?.name + '.' }}
+      </p>
+    </div>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form-fields" novalidate>
+
+    <div class="field-group">
+      <label class="field-label t-label">
+        <span class="material-symbols-rounded">badge</span>
+        Cat Name <span class="required">*</span>
+      </label>
+      <div class="field-input-wrap" [class.field-error]="hasError('name')">
+        <span class="field-icon material-symbols-rounded">pets</span>
+        <input
+          class="field-input"
+          formControlName="name"
+          type="text"
+          placeholder="e.g. Luna, Mochi, Oreo…"
+          autocomplete="off"
+        >
+      </div>
+      @if (hasError('name')) {
+        <span class="error-hint t-caption">
+          <span class="material-symbols-rounded" style="font-size:12px">warning</span>
+          Name is required
+        </span>
+      }
+    </div>
+
+    <div class="field-group">
+      <label class="field-label t-label">
+        <span class="material-symbols-rounded">cake</span>
+        Age <span class="required">*</span>
+      </label>
+      <div class="field-input-wrap" [class.field-error]="hasError('age')">
+        <span class="field-icon material-symbols-rounded">hourglass_top</span>
+        <input
+          class="field-input"
+          formControlName="age"
+          type="text"
+          placeholder="e.g. 3 or 1.5"
+          autocomplete="off"
+        >
+      </div>
+      @if (hasError('age')) {
+        <span class="error-hint t-caption">
+          <span class="material-symbols-rounded" style="font-size:12px">warning</span>
+          Age is required
+        </span>
+      }
+    </div>
+
+    <div class="field-group">
+      <label class="field-label t-label">
+        <span class="material-symbols-rounded">article</span>
+        Description <span class="required">*</span>
+      </label>
+      <div class="field-input-wrap textarea-wrap" [class.field-error]="hasError('description')">
+        <textarea
+          class="field-input field-textarea"
+          formControlName="description"
+          placeholder="Describe this feline — personality, breed, quirks…"
+          rows="4"
+        ></textarea>
+      </div>
+      @if (hasError('description')) {
+        <span class="error-hint t-caption">
+          <span class="material-symbols-rounded" style="font-size:12px">warning</span>
+          Description is required
+        </span>
+      }
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-glass action-btn" (click)="cancel()">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="action-btn submit-btn"
+        [class.btn-brand]="data.mode === 'create'"
+        [class.btn-gold]="data.mode === 'update'"
+        [disabled]="form.invalid || loading"
+      >
+        @if (loading) {
+          <span class="material-symbols-rounded spin-icon">progress_activity</span>
+        } @else {
+          <span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">
+            {{ data.mode === 'create' ? 'cloud_upload' : 'save' }}
+          </span>
+        }
+        {{ loading ? 'Saving…' : (data.mode === 'create' ? 'Create Record' : 'Save Changes') }}
+      </button>
+    </div>
+  </form>
+</div>

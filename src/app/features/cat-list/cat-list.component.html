@@ -1,0 +1,183 @@
+<section class="hero-section dot-grid">
+  <div class="hero-ambient"></div>
+
+  <div class="container-xl">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-7" data-aos="fade-right" data-aos-duration="900">
+        <div class="mb-3">
+          <span class="badge-pill badge-blue">
+            <span class="material-symbols-rounded" style="font-size:11px">auto_awesome</span>
+            Powered by Angular 19 + Signals
+          </span>
+        </div>
+        <h1 class="hero-title t-display">
+          Manage Your<br>
+          <span class="gradient-text">Feline</span> Registry<br>
+          <span class="hero-subtitle-text">Like a Pro.</span>
+        </h1>
+        <p class="hero-desc t-body">
+          A premium, real-time cat record management system. Create, update, search, and remove records instantly — with silky-smooth interactions and a beautiful interface.
+        </p>
+        <div class="hero-cta-row">
+          <button class="btn-brand" (click)="openCreate()">
+            <span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">add_circle</span>
+            Add New Record
+          </button>
+          <button class="btn-glass" (click)="scrollToGrid()">
+            <span class="material-symbols-rounded">south</span>
+            Browse Registry
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-5 d-none d-lg-block text-center" data-aos="fade-left" data-aos-duration="1000">
+        <div class="hero-visual float-anim">
+          <div class="hero-img-ring ring-1"></div>
+          <div class="hero-img-ring ring-2"></div>
+          <div class="hero-img-ring ring-3"></div>
+          <img class="hero-cat-img" src="https://images.unsplash.com/photo-1571566882372-1598d88abd90?w=340&h=340&fit=crop&auto=format" alt="Featured Cat">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-bar section-sm">
+  <div class="container-xl">
+    <div class="stats-grid" data-aos="fade-up" data-aos-duration="700">
+
+      <div class="stat-card glass">
+        <div class="stat-icon-wrap" style="background: linear-gradient(135deg,#4F8FFF22,#7C5BFF22); border:1px solid #4F8FFF33">
+          <span class="material-symbols-rounded" style="color:#4F8FFF;font-variation-settings:'FILL' 1">pets</span>
+        </div>
+        <div>
+          <div class="stat-value t-heading">{{ catService.cats().length }}</div>
+          <div class="t-label text-muted-soft">Total Cats</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass">
+        <div class="stat-icon-wrap" style="background: linear-gradient(135deg,#02E8B022,#00B58922); border:1px solid #02E8B033">
+          <span class="material-symbols-rounded" style="color:#02E8B0;font-variation-settings:'FILL' 1">verified</span>
+        </div>
+        <div>
+          <div class="stat-value t-heading gradient-text-emerald">{{ catService.cats().length }}</div>
+          <div class="t-label text-muted-soft">Verified</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass">
+        <div class="stat-icon-wrap" style="background: linear-gradient(135deg,#FFCB4722,#FF9D0022); border:1px solid #FFCB4733">
+          <span class="material-symbols-rounded" style="color:#FFCB47;font-variation-settings:'FILL' 1">search_insights</span>
+        </div>
+        <div>
+          <div class="stat-value t-heading gradient-text-gold">{{ filteredCats().length }}</div>
+          <div class="t-label text-muted-soft">Showing</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass">
+        <div class="stat-icon-wrap" style="background: linear-gradient(135deg,#7C5BFF22,#FF5BA322); border:1px solid #7C5BFF33">
+          <span class="material-symbols-rounded" style="color:#A090FF;font-variation-settings:'FILL' 1">api</span>
+        </div>
+        <div>
+          <div class="stat-value t-heading" style="color:#A090FF">Live</div>
+          <div class="t-label text-muted-soft">API Status</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="registry-section section" id="registry">
+  <div class="container-xl">
+
+    <div class="registry-toolbar" data-aos="fade-up">
+      <div class="toolbar-left">
+        <h2 class="t-heading" style="font-size:1.6rem; margin:0; color:#1a1a1a">
+          <span class="gradient-text">Feline</span> Registry
+        </h2>
+        <span class="t-caption ms-2" style="color:#666">{{ filteredCats().length }} records</span>
+      </div>
+      <div class="search-wrap glass-sm">
+        <span class="material-symbols-rounded search-icon">search</span>
+        <input
+          class="search-input"
+          type="text"
+          placeholder="Search by name or description…"
+          [value]="searchQuery()"
+          (input)="searchQuery.set($any($event.target).value)"
+        >
+        @if (searchQuery()) {
+          <button class="search-clear btn-glass" (click)="searchQuery.set('')">
+            <span class="material-symbols-rounded" style="font-size:16px; color:#1a1a1a;">close</span>
+          </button>
+        }
+      </div>
+    </div>
+
+    @if (catService.loading()) {
+      <div class="cat-grid mt-4">
+        @for (n of [1,2,3,4,5,6]; track n) {
+          <div class="skeleton-card glass">
+            <div class="skeleton skeleton-img"></div>
+            <div class="skeleton-body">
+              <div class="skeleton skeleton-line" style="width:60%; height:18px; margin-bottom:8px;"></div>
+              <div class="skeleton skeleton-line" style="width:40%; height:12px; margin-bottom:16px;"></div>
+              <div class="skeleton skeleton-line" style="height:11px;"></div>
+              <div class="skeleton skeleton-line" style="height:11px; width:80%;"></div>
+              <div class="skeleton skeleton-line" style="height:11px; width:55%;"></div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    @if (catService.error() && !catService.loading()) {
+      <div class="error-state glass text-center" data-aos="zoom-in">
+        <div class="error-icon-wrap">
+          <span class="material-symbols-rounded" style="font-size:2.5rem; color:#ff3366; font-variation-settings:'FILL' 1">error</span>
+          <div class="error-ring"></div>
+        </div>
+        <h3 class="t-heading mt-3" style="color:#1a1a1a">Connection Failed</h3>
+        <p class="t-body" style="color:#666">{{ catService.error() }}</p>
+        <button class="btn-brand mt-2" (click)="catService.fetchCats()">
+          <span class="material-symbols-rounded">refresh</span>
+          Retry
+        </button>
+      </div>
+    }
+
+    @if (!catService.loading()) {
+      <div class="cat-grid mt-4">
+        @for (cat of filteredCats(); track cat.id; let i = $index) {
+          <app-cat-card
+            [cat]="cat"
+            [idx]="i"
+            (onEdit)="editCat($event)"
+            (onDelete)="deleteCat($event)"
+            (onView)="viewCat($event)"
+          ></app-cat-card>
+        } @empty {
+          <div class="empty-state glass" data-aos="zoom-in" style="grid-column:1/-1">
+            <img src="https://images.unsplash.com/photo-1602491453631-e2a5ad90a131?w=200&h=160&fit=crop" alt="No cats" class="empty-img">
+            <h3 class="t-heading mt-4" style="color:#1a1a1a">
+              {{ searchQuery() ? 'No Results Found' : 'Registry is Empty' }}
+            </h3>
+            <p class="t-body" style="color:#666">
+              {{ searchQuery() ? 'Try adjusting your search term.' : 'Add your first feline record to get started.' }}
+            </p>
+            @if (!searchQuery()) {
+              <button class="btn-brand mt-3" (click)="openCreate()">
+                <span class="material-symbols-rounded">add</span>
+                Add First Record
+              </button>
+            }
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+</section>

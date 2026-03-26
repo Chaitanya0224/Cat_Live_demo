@@ -1,0 +1,36 @@
+<header class="site-header" [class.scrolled]="isScrolled()">
+  <div class="header-inner container-xl">
+    <a class="brand" href="javascript:void(0)">
+      <div class="brand-icon-wrap">
+        <span class="material-symbols-rounded">monitoring</span>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name t-heading">CatVault</span>
+        <span class="brand-tag t-label">Registry</span>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <div class="live-dot" title="API Connected">
+        <span class="dot-pulse"></span>
+        <span class="t-caption">Live</span>
+      </div>
+      <button class="btn-brand" (click)="openCreate()">
+        <span class="material-symbols-rounded" style="font-size:1rem;font-variation-settings:'FILL' 1">add</span>
+        Add Record
+      </button>
+    </div>
+
+    <button class="mobile-menu-btn btn-glass" (click)="mobileOpen.set(!mobileOpen())">
+      <span class="material-symbols-rounded">{{ mobileOpen() ? 'close' : 'menu' }}</span>
+    </button>
+  </div>
+
+  @if (mobileOpen()) {
+    <nav class="mobile-nav glass animate__animated animate__fadeInDown">
+      <button class="btn-brand w-100 justify-content-center mt-2" (click)="openCreate(); mobileOpen.set(false)">
+        <span class="material-symbols-rounded" style="font-size:1rem">add</span> Add Record
+      </button>
+    </nav>
+  }
+</header>

@@ -1,0 +1,68 @@
+<article
+  class="cat-card glass glass-hover border-animated noise-overlay"
+  [style.--accent]="palette().accent"
+  data-aos="fade-up"
+  [attr.data-aos-delay]="(idx() % 4) * 80"
+>
+  <div class="card-img-wrap">
+    <img [src]="imageUrl()" [alt]="cat().name" class="card-img" loading="lazy">
+    <div class="card-img-overlay"></div>
+    <div class="card-top-badges">
+      <span class="badge-pill {{ palette().badge }}">
+        <span class="material-symbols-rounded" style="font-size:10px">star</span>
+        {{ palette().tag }}
+      </span>
+      <span class="badge-pill badge-blue t-code" style="font-size:0.65rem">
+        #{{ cat().id.slice(0, 8) }}
+      </span>
+    </div>
+  </div>
+
+  <div class="card-body-inner">
+    <div class="card-meta">
+      <div class="avatar-ring" [style.border-color]="palette().accent">
+        <img [src]="imageUrl()" [alt]="cat().name">
+      </div>
+      <div class="card-identity">
+        <h3 class="cat-name t-heading">{{ cat().name }}</h3>
+        <div class="cat-age-row">
+          <span class="material-symbols-rounded" style="font-size:14px">cake</span>
+          <span class="t-caption" style="opacity:1">{{ cat().age }} years old</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="cat-desc t-body">{{ cat().description }}</p>
+
+    <div class="card-stats">
+      <div class="stat-chip">
+        <span class="material-symbols-rounded">pets</span>
+        <span class="t-caption">Domestic</span>
+      </div>
+      <div class="stat-chip">
+        <span class="material-symbols-rounded">verified_user</span>
+        <span class="t-caption">Verified</span>
+      </div>
+      <div class="stat-chip accent-stat">
+        <span class="material-symbols-rounded">health_and_safety</span>
+        <span class="t-caption">Active</span>
+      </div>
+    </div>
+
+    <hr class="divider" style="margin:12px 0">
+
+    <div class="card-actions">
+      <button class="btn-glass card-btn" (click)="onEdit.emit(cat())" title="Edit record">
+        <span class="material-symbols-rounded">edit</span>
+        Edit
+      </button>
+      <button class="btn-danger-soft card-btn" (click)="onDelete.emit(cat().id)" title="Remove record">
+        <span class="material-symbols-rounded">delete</span>
+        Remove
+      </button>
+      <button class="btn-outline-brand card-btn ms-auto" (click)="onView.emit(cat())" title="View details">
+        <span class="material-symbols-rounded">arrow_outward</span>
+      </button>
+    </div>
+  </div>
+</article>

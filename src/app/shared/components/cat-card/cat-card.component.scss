@@ -1,0 +1,154 @@
+// ── Card Container ────────────────────────────────────────────────────────────
+.cat-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-base);
+
+  &:hover {
+    transform: translateY(-8px) scale(1.013);
+    --color-border-highlight: var(--accent, var(--color-accent-1));
+  }
+}
+
+// ── Card Image ────────────────────────────────────────────────────────────────
+.card-img-wrap {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease-smooth), filter 0.5s;
+}
+
+.cat-card:hover .card-img {
+  transform: scale(1.08);
+  filter: brightness(1.1) saturate(1.2);
+}
+
+.card-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%);
+}
+
+.card-top-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+// ── Card Body ─────────────────────────────────────────────────────────────────
+.card-body-inner {
+  padding: 16px 18px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.avatar-ring {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid;
+  overflow: hidden;
+  box-shadow: 0 0 14px rgba(255, 107, 0, 0.15);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.cat-name {
+  margin: 0 0 2px;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cat-age-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-accent-2);
+}
+
+.cat-desc {
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #555;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+// ── Card Stats ────────────────────────────────────────────────────────────────
+.card-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px 3px 7px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--color-border);
+  font-size: 0.72rem;
+  color: #666;
+
+  .material-symbols-rounded { font-size: 13px; }
+}
+
+.accent-stat {
+  background: rgba(255, 107, 0, 0.08);
+  border-color: rgba(255, 107, 0, 0.2);
+  color: var(--color-accent-1);
+}
+
+// ── Card Actions ──────────────────────────────────────────────────────────────
+.card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.card-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  border-radius: var(--radius-md);
+
+  .material-symbols-rounded { font-size: 15px; }
+}
