@@ -107,7 +107,7 @@
           type="text"
           placeholder="Search by name or description…"
           [value]="searchQuery()"
-          (input)="searchQuery.set($any($event.target).value)"
+          (input)="onSearch($event)"
         >
         @if (searchQuery()) {
           <button class="search-clear btn-glass" (click)="searchQuery.set('')">

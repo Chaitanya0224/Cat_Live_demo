@@ -104,16 +104,16 @@
         class="action-btn submit-btn"
         [class.btn-brand]="data.mode === 'create'"
         [class.btn-gold]="data.mode === 'update'"
-        [disabled]="form.invalid || loading"
+        [disabled]="form.invalid || loading()"
       >
-        @if (loading) {
+        @if (loading()) {
           <span class="material-symbols-rounded spin-icon">progress_activity</span>
         } @else {
           <span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">
             {{ data.mode === 'create' ? 'cloud_upload' : 'save' }}
           </span>
         }
-        {{ loading ? 'Saving…' : (data.mode === 'create' ? 'Create Record' : 'Save Changes') }}
+        {{ loading() ? 'Saving…' : (data.mode === 'create' ? 'Create Record' : 'Save Changes') }}
       </button>
     </div>
   </form>

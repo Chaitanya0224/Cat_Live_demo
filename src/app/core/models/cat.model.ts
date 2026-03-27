@@ -3,7 +3,21 @@ export interface Cat {
   name: string;
   age: string;
   description: string;
-  imageUrl?: string; // Optional: we can generate a random image for each cat
+  imageUrl?: string; 
+}
+
+export interface RawCatItem {
+  id: string;
+  info: {
+    name: string;
+    age: string;
+    description: string;
+  };
+}
+
+export interface RawCatResponse {
+  status_code: number;
+  data: RawCatItem[];
 }
 
 export interface CreateCatRequest {

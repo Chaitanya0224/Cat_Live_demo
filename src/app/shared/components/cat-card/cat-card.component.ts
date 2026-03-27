@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Cat } from '../../../core/models/cat.model';
 
@@ -27,7 +27,8 @@ const CAT_IMAGES = [
   standalone: true,
   imports: [CommonModule],
   templateUrl: './cat-card.component.html',
-  styleUrl: './cat-card.component.scss'
+  styleUrl: './cat-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatCardComponent {
   cat = input.required<Cat>();

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { Component, inject, OnInit, signal, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -13,7 +13,8 @@ import { Cat } from '../../core/models/cat.model';
   standalone: true,
   imports: [CommonModule, FormsModule, MatProgressSpinnerModule, MatDialogModule, CatCardComponent],
   templateUrl: './cat-list.component.html',
-  styleUrl: './cat-list.component.scss'
+  styleUrl: './cat-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatListComponent implements OnInit {
   catService = inject(CatService);
@@ -30,6 +31,11 @@ export class CatListComponent implements OnInit {
       c.age.toLowerCase().includes(q)
     );
   });
+
+  onSearch(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.searchQuery.set(target.value);
+  }
 
   ngOnInit() { this.catService.fetchCats(); }
 
